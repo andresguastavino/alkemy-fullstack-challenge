@@ -1,15 +1,18 @@
 require('dotenv').config();
-const { PORT } = process.env;
+const { BACKEND_PORT } = process.env;
 
 const express = require('express');
 const bodyParser = require('body-parser');
 
-require('./database/database');
+require('./database');
+const router = require('./routes');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.listen(PORT, () => {
-    console.log(`App listening on port: ${ PORT }`)
-})
+app.use('/', router);
+
+app.listen(BACKEND_PORT, () => {
+    console.log(`App listening on port: ${ BACKEND_PORT }`)
+});
