@@ -1,4 +1,4 @@
-const { DATABASE_USERNAME, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_DIALECT } = process.env;
+const { DATABASE_NAME, DATABASE_USERNAME, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_PORT, DATABASE_DIALECT } = process.env;
 
 const Sequelize = require('sequelize');
 
@@ -41,12 +41,13 @@ Operation.belongsTo(User, {
     foreignKey: 'category_id'
 });
 
-database.sync({ force: true })
+database.sync({ force: false })
     .then(console.log('Database synced succesfully!'))
     .catch(err => console.error('An error ocurred when trying to sync with the database: ', err));
+    
 
 module.exports = {
-    Operation,
-    Category,
+    Operation, 
+    Category, 
     User,
 };
